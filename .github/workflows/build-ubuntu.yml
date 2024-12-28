@@ -22,7 +22,7 @@ on:
 jobs:
   build-ubuntu:
     runs-on: ubuntu-22.04
-    if: github.event_name == 'push'
+
     steps:
       - uses: actions/checkout@v2
 

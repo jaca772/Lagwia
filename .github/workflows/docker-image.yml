@@ -51,4 +51,4 @@ jobs:
         if: github.event_name == 'pull_request' || github.ref_type == 'branch'
         with:
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ghcr.io/jaca772/lagwia:latest:latest
+          tags: ghcr.io/jaca772/lagwia:latest

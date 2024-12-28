@@ -11,6 +11,10 @@ include(cotire)
 
 add_compile_options(-Wall -pipe -fvisibility=hidden)
 
+set(CMAKE_CXX_STANDARD 20) # Set standard to C++20
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 set(CMAKE_CXX_FLAGS_PERFORMANCE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
 
 if (CMAKE_COMPILER_IS_GNUCXX)

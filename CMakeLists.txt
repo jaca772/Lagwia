@@ -72,7 +72,6 @@ target_link_libraries(tfs
     ${CMAKE_THREAD_LIBS_INIT}
     z  # Jeżeli wymagana jest manualna biblioteka zlib
     fmt  # Dodajemy bibliotekę fmt
-    OpenMP::OpenMP_CXX
 )
 
 set_target_properties(tfs PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "src/otpch.h")

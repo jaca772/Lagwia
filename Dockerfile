@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libgomp1 \
   libfmt-dev \
   zlib1g-dev \
-  libstdc++-11-dev \  # Dodanie pakietu libstdc++-11-dev
+  libstdc++-11-dev \
   && apt-get clean
 
 # Skopiowanie kodu źródłowego do kontenera

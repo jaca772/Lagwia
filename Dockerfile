@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   pkg-config \
   build-essential \
   cmake \
-  liblua5.1-0-dev \
+  liblua5.3-dev \
   libsqlite3-dev \
   libmysqlclient-dev \
   libxml2-dev \

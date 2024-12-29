@@ -69,16 +69,16 @@ endif()
 include_directories(${MYSQL_INCLUDE_DIR} ${LUA_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIR} ${Crypto++_INCLUDE_DIR})
 
 # Dodajemy wymagane biblioteki do linkowania, w tym 'zlib' (lub 'z', jeśli konieczne)
+# Link libraries
 target_link_libraries(tfs 
-    ${ZLIB_LIBRARIES} 
-    ${MYSQL_CLIENT_LIBS} 
-    ${LUA_LIBRARIES} 
-    ${Boost_LIBRARIES} 
-    ${PUGIXML_LIBRARIES} 
-    ${Crypto++_LIBRARIES} 
-    ${CMAKE_THREAD_LIBS_INIT}
-    z  # Jeżeli wymagana jest manualna biblioteka zlib
-    fmt  # Dodajemy bibliotekę fmt
+    PUBLIC ${ZLIB_LIBRARIES} 
+    PUBLIC ${MYSQL_CLIENT_LIBS} 
+    PUBLIC ${LUA_LIBRARIES} 
+    PUBLIC ${Boost_LIBRARIES} 
+    PUBLIC ${PUGIXML_LIBRARIES} 
+    PUBLIC ${Crypto++_LIBRARIES} 
+    PUBLIC ${CMAKE_THREAD_LIBS_INIT}
+    PUBLIC fmt
 )
 
 set_target_properties(tfs PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "src/otpch.h")

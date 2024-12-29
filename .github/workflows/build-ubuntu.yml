@@ -2,14 +2,14 @@ name: Build on Ubuntu
 on: 
   workflow_dispatch:
     
-  push:
-    branches:
-      - main
+#  push:
+#    branches:
+#      - main
 
-    paths:
-      - cmake/**
-      - src/**
-      - CMakeLists.txt
+#    paths:
+#      - cmake/**
+#      - src/**
+#      - CMakeLists.txt
 
   pull_request:
     branches:

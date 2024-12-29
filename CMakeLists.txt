@@ -62,23 +62,23 @@ add_executable(tfs ${tfs_SRC})
 # Dodajemy flagi kompilatora dla OpenMP
 if(OpenMP_CXX_FOUND)
     add_compile_options(-fopenmp)  # Dodaj flagę kompilatora OpenMP
-    target_link_libraries(tfs PUBLIC OpenMP::OpenMP_CXX)  # Linkujemy z OpenMP
+    target_link_libraries(tfs OpenMP::OpenMP_CXX)  # Linkujemy z OpenMP
 endif()
 
 # Ensure the correct libraries and include paths are added
 include_directories(${MYSQL_INCLUDE_DIR} ${LUA_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIR} ${Crypto++_INCLUDE_DIR})
 
 # Dodajemy wymagane biblioteki do linkowania, w tym 'zlib' (lub 'z', jeśli konieczne)
-# Link libraries
 target_link_libraries(tfs 
-    PUBLIC ${ZLIB_LIBRARIES} 
-    PUBLIC ${MYSQL_CLIENT_LIBS} 
-    PUBLIC ${LUA_LIBRARIES} 
-    PUBLIC ${Boost_LIBRARIES} 
-    PUBLIC ${PUGIXML_LIBRARIES} 
-    PUBLIC ${Crypto++_LIBRARIES} 
-    PUBLIC ${CMAKE_THREAD_LIBS_INIT}
-    PUBLIC fmt
+    ${ZLIB_LIBRARIES} 
+    ${MYSQL_CLIENT_LIBS} 
+    ${LUA_LIBRARIES} 
+    ${Boost_LIBRARIES} 
+    ${PUGIXML_LIBRARIES} 
+    ${Crypto++_LIBRARIES} 
+    ${CMAKE_THREAD_LIBS_INIT}
+    z  # Jeżeli wymagana jest manualna biblioteka zlib
+    fmt  # Dodajemy bibliotekę fmt
 )
 
 set_target_properties(tfs PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "src/otpch.h")

@@ -55,14 +55,15 @@ find_package(Boost REQUIRED COMPONENTS system filesystem iostreams)
 # Find fmt library
 find_package(fmt REQUIRED)
 
+# Tworzenie docelowego pliku wykonawczego
+add_subdirectory(src)
+add_executable(tfs ${tfs_SRC})
+
 # Dodajemy flagi kompilatora dla OpenMP
 if(OpenMP_CXX_FOUND)
     add_compile_options(-fopenmp)  # Dodaj flagę kompilatora OpenMP
     target_link_libraries(tfs PUBLIC OpenMP::OpenMP_CXX)  # Linkujemy z OpenMP
 endif()
-
-add_subdirectory(src)
-add_executable(tfs ${tfs_SRC})
 
 # Ensure the correct libraries and include paths are added
 include_directories(${MYSQL_INCLUDE_DIR} ${LUA_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIR} ${Crypto++_INCLUDE_DIR})

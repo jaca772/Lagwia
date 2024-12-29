@@ -7,8 +7,6 @@ project(tfs)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-include(cotire)
-
 add_compile_options(-Wall -pipe -fvisibility=hidden)
 
 set(CMAKE_CXX_STANDARD 20) # Set standard to C++20
@@ -80,8 +78,3 @@ target_link_libraries(tfs
     z  # Jeżeli wymagana jest manualna biblioteka zlib
     fmt  # Dodajemy bibliotekę fmt
 )
-
-set_target_properties(tfs PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "src/otpch.h")
-set_target_properties(tfs PROPERTIES COTIRE_ADD_UNITY_BUILD FALSE)
-
-cotire(tfs)

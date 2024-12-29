@@ -29,10 +29,10 @@ find_package(Crypto++ REQUIRED)
 find_package(PugiXML REQUIRED)
 find_package(MySQL)
 find_package(Threads)
-find_package(OpenMP REQUIRED)
+find_package(OpenMP REQUIRED)  # Dodane OpenMP
 find_package(ZLIB REQUIRED)  # Dodajemy wykrywanie ZLIB
 
-# Selects LuaJIT if user defines or auto-detected
+# Obsługa LuaJIT, jeżeli włączona
 if(DEFINED USE_LUAJIT AND NOT USE_LUAJIT)
     set(FORCE_LUAJIT ${USE_LUAJIT})
 else()
@@ -54,6 +54,12 @@ find_package(Boost REQUIRED COMPONENTS system filesystem iostreams)
 
 # Find fmt library
 find_package(fmt REQUIRED)
+
+# Dodajemy flagi kompilatora dla OpenMP
+if(OpenMP_CXX_FOUND)
+    add_compile_options(-fopenmp)  # Dodaj flagę kompilatora OpenMP
+    target_link_libraries(tfs PUBLIC OpenMP::OpenMP_CXX)  # Linkujemy z OpenMP
+endif()
 
 add_subdirectory(src)
 add_executable(tfs ${tfs_SRC})

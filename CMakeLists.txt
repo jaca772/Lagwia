@@ -7,6 +7,8 @@ project(tfs)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+include(cotire)
+
 add_compile_options(-Wall -pipe -fvisibility=hidden)
 
 set(CMAKE_CXX_STANDARD 20) # Set standard to C++20
@@ -27,10 +29,10 @@ find_package(Crypto++ REQUIRED)
 find_package(PugiXML REQUIRED)
 find_package(MySQL)
 find_package(Threads)
-find_package(OpenMP REQUIRED)  # Dodane OpenMP
+find_package(OpenMP REQUIRED)
 find_package(ZLIB REQUIRED)  # Dodajemy wykrywanie ZLIB
 
-# Obsługa LuaJIT, jeżeli włączona
+# Selects LuaJIT if user defines or auto-detected
 if(DEFINED USE_LUAJIT AND NOT USE_LUAJIT)
     set(FORCE_LUAJIT ${USE_LUAJIT})
 else()
@@ -53,15 +55,8 @@ find_package(Boost REQUIRED COMPONENTS system filesystem iostreams)
 # Find fmt library
 find_package(fmt REQUIRED)
 
-# Tworzenie docelowego pliku wykonawczego
 add_subdirectory(src)
 add_executable(tfs ${tfs_SRC})
-
-# Dodajemy flagi kompilatora dla OpenMP
-if(OpenMP_CXX_FOUND)
-    add_compile_options(-fopenmp)  # Dodaj flagę kompilatora OpenMP
-    target_link_libraries(tfs OpenMP::OpenMP_CXX)  # Linkujemy z OpenMP
-endif()
 
 # Ensure the correct libraries and include paths are added
 include_directories(${MYSQL_INCLUDE_DIR} ${LUA_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${PUGIXML_INCLUDE_DIR} ${Crypto++_INCLUDE_DIR})
@@ -78,3 +73,8 @@ target_link_libraries(tfs
     z  # Jeżeli wymagana jest manualna biblioteka zlib
     fmt  # Dodajemy bibliotekę fmt
 )
+
+set_target_properties(tfs PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "src/otpch.h")
+set_target_properties(tfs PROPERTIES COTIRE_ADD_UNITY_BUILD FALSE)
+
+cotire(tfs)

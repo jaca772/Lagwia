@@ -21,9 +21,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libboost-regex-dev \
   libboost-thread-dev \
   libboost-iostreams-dev \
-  gcc-10 \
-  g++-10 \
-  cpp-10 \
+  gcc \
+  g++ \
+  cpp \
   wget \
   libcrypto++-dev \
   libpugixml-dev \
@@ -31,11 +31,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   libfmt-dev \
   zlib1g-dev \
   && apt-get clean
-
-# Ustawienie wersji kompilatora gcc i g++
-RUN rm -rf /usr/bin/gcc && rm -rf /usr/bin/g++ \
-  && ln -s /usr/bin/gcc-10 /usr/bin/gcc \
-  && ln -s /usr/bin/g++-10 /usr/bin/g++
 
 # Skopiowanie kodu źródłowego do kontenera
 COPY cmake /usr/src/forgottenserver/cmake/
